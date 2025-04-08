@@ -31,9 +31,9 @@ done
 
 echo "最大価値: ${dp[capacity]}"
 
-echo "sel[capacity]: [${sel[capacity]}]"
+#echo "sel[capacity]: [${sel[capacity]}]"
 IFS=' ' read -r -a selected_items <<< "${sel[capacity]}"
-echo "selected_items: ${selected_items[@]}"
+#echo "selected_items: ${selected_items[@]}"
 
 
 reversed=()
@@ -60,8 +60,8 @@ echo "合計サイズ: $total_weight"
 echo "合計価値: $total_value"
 
 
-echo "capacity: $capacity"
-echo "names: ${names[@]}"
-echo "values: ${values[@]}"
-echo "weights: ${weights[@]}"
-echo "item_count: $item_count"
+#echo "capacity: $capacity"
+#echo "names: ${names[@]}"
+#echo "values: ${values[@]}"
+#echo "weights: ${weights[@]}"
+#echo "item_count: $item_count"
