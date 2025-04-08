@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANG=ja_JP.UTF-8
+export LC_ALL=ja_JP.UTF-8
 
 source ./data.sh
 
@@ -31,10 +31,11 @@ done
 
 echo "最大価値: ${dp[capacity]}"
 
-# 選択情報は sel[capacity] に記録されている（スペース区切りのインデックス）
-selected_items=(${sel[capacity]})
+echo "sel[capacity]: [${sel[capacity]}]"
+IFS=' ' read -r -a selected_items <<< "${sel[capacity]}"
+echo "selected_items: ${selected_items[@]}"
 
-# 選択された品物リストの表示：できれば本来の順番にするため、逆順に出す（後ろで追加されているため）
+
 reversed=()
 for (( idx=${#selected_items[@]}-1; idx>=0; idx-- )); do
   reversed+=( "${selected_items[idx]}" )
@@ -45,14 +46,22 @@ echo "選ばれた品物一覧："
 total_value=0
 total_weight=0
 for idx in "${reversed[@]}"; do
-  name=${names[idx]}
-  value=${values[idx]}
-  weight=${weights[idx]}
-  echo "- $name（価値: $value サイズ: $weight）"
+  name=${names[$idx]}
+  value=${values[$idx]}
+  weight=${weights[$idx]}
+  printf -- "- %s（価値: %d サイズ: %d）\n" "$name" "$value" "$weight"
   ((total_value += value))
   ((total_weight += weight))
 done
 
+
 echo ""
 echo "合計サイズ: $total_weight"
 echo "合計価値: $total_value"
+
+
+echo "capacity: $capacity"
+echo "names: ${names[@]}"
+echo "values: ${values[@]}"
+echo "weights: ${weights[@]}"
+echo "item_count: $item_count"
